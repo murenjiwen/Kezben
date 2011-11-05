@@ -158,7 +158,8 @@ Kezben Hand Pose Recognizer
 \end_layout
 
 \begin_layout Subtitle
-Subtitle (if you have one)
+Toward Open-Source ASL Learning Software: Hand Part Identification with
+ Consumer Hardware
 \end_layout
 
 \begin_layout Author
@@ -216,6 +217,10 @@ California State University San Marcos
 \begin_inset Newline newline
 \end_inset
 
+College of Science and Mathematics
+\begin_inset Newline newline
+\end_inset
+
 Computer Science Department
 \begin_inset Newline newline
 \end_inset
@@ -230,7 +235,7 @@ Computer Science Department
 \begin_layout Lowertitleback
 
 \series bold
-Dean
+Advisor
 \series default
 
 \begin_inset VSpace smallskip
@@ -242,7 +247,7 @@ Dean
 
 Prof.
  Dr.
- xxx yyy
+ Shaun-inn Wu
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -252,7 +257,7 @@ Prof.
 
 
 \series bold
-Referees
+Project Committee
 \series default
 
 \begin_inset VSpace smallskip
@@ -264,7 +269,7 @@ Referees
 
 Prof.
  Dr.
- aaa bbb
+ David Schaafsma
 \begin_inset VSpace smallskip
 \end_inset
 
@@ -274,7 +279,7 @@ Prof.
 
 Prof.
  Dr.
- xxx yyy
+ Xiaoyu Zhang
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -294,7 +299,7 @@ Date of the graduation (optional)
 \begin_inset Newline newline
 \end_inset
 
-xx.yy.zzzz
+9 December 2011
 \end_layout
 
 \begin_layout Dedication
