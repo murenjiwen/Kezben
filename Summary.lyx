@@ -113,7 +113,26 @@ adds table of contents entry
 \end_layout
 
 \begin_layout Standard
-Abstract/Summary text
+Demonstrate the applicability of per-pixel body part estimation from single
+ depth images to the human hand and wrist.
+\end_layout
+
+\begin_layout Standard
+Consumer access to environmental time-of-flight depth cameras became a reality
+ with the release of the Microsoft Kinect.
+ Personal camera + projector systems are a subject of ongoing research (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Forutanpour2011"
+
+\end_inset
+
+).
+ Current-generation embedded GPUs and FPGAs provide similar parallel-processing
+ capabilities to the Xbox 360 GPU.
+ The time has come for affordable, responsive ASL recognition and zero-impact
+ haptic keyboard replacements.
+ The core of either system will be a real-time hand pose estimator or recognizer.
 \end_layout
 
 \end_body
