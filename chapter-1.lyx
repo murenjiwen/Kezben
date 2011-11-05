@@ -327,7 +327,7 @@ key "Shotton2011"
 
 \end_inset
 
-in context of 
+ in context of 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Wang2009"
@@ -372,16 +372,20 @@ Usability - Tracking is fragile, marking is inconvenient or uncomfortable
 \end_layout
 
 \begin_layout Standard
-Robustness - Low accuracy or low variation
+Robustness - Low accuracy or low variation?
+\end_layout
+
+\begin_layout Standard
+Depth camera - lighting is a major problem for RGB solutions
 \end_layout
 
 \begin_layout Standard
 Performance - Needs to meet or exceed framerate to match typing speeds (750
- CPM)
+ CPM).
 \end_layout
 
 \begin_layout Standard
-Price - 
+Price of sensor - 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "hackenberg2011lightweight"
@@ -406,7 +410,12 @@ key "Smisek"
 \end_inset
 
  found the SR4000 to have an order of magnitude more error and jitter compared
- to the Kinect (in the 0.9 to 1.4 meter range).
+ to the Kinect (in the 0.9 to 1.4 meter range), and costs $9000.
+\end_layout
+
+\begin_layout Standard
+Computational cost - targeting embedded GPU or FPGA (minimal cost, low power,
+ small, light)
 \end_layout
 
 \begin_layout Standard
@@ -419,6 +428,36 @@ key "Liwicki2009"
 
 ? Achieves high accuracy (80%) from low resolution, small amounts of data.
  Notably only targets a single signer and does not give performance information.
+\end_layout
+
+\begin_layout Section
+Approaches to Recognition
+\end_layout
+
+\begin_layout Standard
+needs further reading
+\end_layout
+
+\begin_layout Section
+Other Work of Interest
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wang2011"
+
+\end_inset
+
+ used a pair of webcams to achieve high-precision hand tracking and pinch
+ gestures for a 3D assembly interface prototype.
+ Advantages: no marking, easy to switch interfaces, handles occlusion well.
+ Disadvantages: large database which is workstation-specific, only runs
+ at 20 fps, 10 minutes of manual calibration.
+\end_layout
+
+\begin_layout Standard
+Uebersax has an awesome table.
 \end_layout
 
 \begin_layout Standard
