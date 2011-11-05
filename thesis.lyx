@@ -91,8 +91,8 @@ customHeadersFooters
 \pdf_backref false
 \pdf_pdfusetitle true
 \pdf_quoted_options "pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
-\papersize a4paper
-\use_geometry false
+\papersize letterpaper
+\use_geometry true
 \use_amsmath 2
 \use_esint 1
 \use_mhchem 1
@@ -132,13 +132,17 @@ customHeadersFooters
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1.5in
+\topmargin 1.25in
+\rightmargin 1.25in
+\bottommargin 1.25in
 \secnumdepth 3
 \tocdepth 2
 \paragraph_separation skip
 \defskip medskip
 \quotes_language english
 \papercolumns 1
-\papersides 2
+\papersides 1
 \paperpagestyle fancy
 \tracking_changes false
 \output_changes false
