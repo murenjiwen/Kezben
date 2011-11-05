@@ -118,8 +118,8 @@ Demonstrate the applicability of per-pixel body part estimation from single
 \end_layout
 
 \begin_layout Standard
-Consumer access to environmental time-of-flight depth cameras became a reality
- with the release of the Microsoft Kinect.
+Consumer access to environmental depth cameras became a reality with the
+ release of the Microsoft Kinect.
  Personal camera + projector systems are a subject of ongoing research (
 \begin_inset CommandInset citation
 LatexCommand cite
