@@ -795,8 +795,8 @@ restore the right header line
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "thesisExample"
-options "alpha"
+bibfiles "Master's Project,thesisExample,My Collection"
+options "acm"
 
 \end_inset
 
