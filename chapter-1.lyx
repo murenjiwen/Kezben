@@ -293,7 +293,7 @@ key "Shotton2011"
 
 \end_inset
 
-covers the technique by which Microsoft generated the trees which the Xbox
+ covers the technique by which Microsoft generated the trees which the Xbox
  uses for human pose recognition.
  The primary technique involved is per-pixel body part estimation, implemented
  by training randomized decision trees on synthetic depth images.
@@ -317,12 +317,113 @@ key "Wang2009"
 \end_layout
 
 \begin_layout Section
-The next section
+This Problem in the Literature
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shotton2011"
+
+\end_inset
+
+in context of 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wang2009"
+
+\end_inset
+
+ is 
+\begin_inset Quotes eld
+\end_inset
+
+automatically inferring the colors of an virtual colored suit from a depth
+ image
+\begin_inset Quotes erd
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Uebersax2011"
+
+\end_inset
+
+'s performance problem is hand segmentation.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Oikonomidis2011"
+
+\end_inset
+
+ uses RGB data for segmentation as well as a powerful machine to achieve
+ 15 Hz.
+\end_layout
+
+\begin_layout Section
+Shortcomings of other approaches
+\end_layout
+
+\begin_layout Standard
+Usability - Tracking is fragile, marking is inconvenient or uncomfortable
+\end_layout
+
+\begin_layout Standard
+Robustness - Low accuracy or low variation
+\end_layout
+
+\begin_layout Standard
+Performance - Needs to meet or exceed framerate to match typing speeds (750
+ CPM)
+\end_layout
+
+\begin_layout Standard
+Price - 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "hackenberg2011lightweight"
+
+\end_inset
+
+ 
+\begin_inset Quotes eld
+\end_inset
+
+selected the SwissRanger SR4000 as it provides a resolution of 176 by 144
+ pixels at a frame rate of 55 Hz
+\begin_inset Quotes erd
+\end_inset
+
+, which is a ToF camera.
+ Notably, 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smisek"
+
+\end_inset
+
+ found the SR4000 to have an order of magnitude more error and jitter compared
+ to the Kinect (in the 0.9 to 1.4 meter range).
+\end_layout
+
+\begin_layout Standard
+What about 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liwicki2009"
+
+\end_inset
+
+? Achieves high accuracy (80%) from low resolution, small amounts of data.
+ Notably only targets a single signer and does not give performance information.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Branch NoChildDocument
-status open
+status collapsed
 
 \begin_layout Standard
 \begin_inset CommandInset bibtex

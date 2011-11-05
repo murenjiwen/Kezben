@@ -267,7 +267,7 @@ thepage
 \end_layout
 
 \begin_layout Chapter
-Title of next chapter
+Synthetic Depth Images
 \end_layout
 
 \begin_layout Section
@@ -299,7 +299,17 @@ key "Rich1921,Marq1963"
 \end_layout
 
 \begin_layout Section
-The next section
+Camera setup
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smisek"
+
+\end_inset
+
+ gives a focal length of 6.1 mm.
 \end_layout
 
 \begin_layout Standard
