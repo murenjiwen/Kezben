@@ -54,7 +54,6 @@
 \end_preamble
 \options intoc,bibliography=totoc,index=totoc,BCOR10mm,captions=tableheading,titlepage,fleqn
 \use_default_options true
-\master thesis.lyx
 \begin_modules
 customHeadersFooters
 \end_modules
@@ -252,15 +251,6 @@ thepage
 \end_layout
 
 \begin_layout Right Footer
-\begin_inset Argument
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
 \begin_inset ERT
 status collapsed
 
@@ -277,7 +267,7 @@ thepage
 \end_layout
 
 \begin_layout Chapter
-Literature Review
+Synthetic Depth Images
 \end_layout
 
 \begin_layout Section
@@ -285,189 +275,41 @@ Overview
 \end_layout
 
 \begin_layout Standard
-Depth imaging cameras are now widely available to consumers in the form
- of the Microsoft Kinect.
- As this is a newly available product representing an order-of-magnitude
- cost reduction for this technology, very little relevant research has been
- published However, considerable effort has been put into creating drivers
- for the Kinect and demonstrations of its possibilities (see Tools).
-\end_layout
+bla bla bla bla bla bla bla bla bla bla bla bla bla PPS
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "PPS"
+description "Polyphenylene sulfide"
 
-\begin_layout Standard
-This project is derived primarily from Microsoft’s published research, which
- was incorporated into the Xbox 360 Kinect driver.
- 
+\end_inset
+
+ bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+ bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+ bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+ bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+ bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
+ bla bla bla bla bla bla bla, see 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Shotton2011"
+key "Rich1921,Marq1963"
 
-\end_inset
-
- covers the technique by which Microsoft generated the trees which the Xbox
- uses for human pose recognition.
- The primary technique involved is per-pixel body part estimation, implemented
- by training randomized decision trees on synthetic depth images.
- The paper also shows that some accuracy can be attained with relatively
- shallow trees and small datasets.
-\end_layout
-
-\begin_layout Standard
-Another recent paper indicates the current state of the art in optical hand
- posture determination.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Wang2009"
-
-\end_inset
-
- used image processing and nearest-neighbor search of a pose database.
- It resulted in a sufficiently accurate system to translate sign language
- finger spelling.
-\end_layout
-
-\begin_layout Section
-This Problem in the Literature
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Shotton2011"
-
-\end_inset
-
- in context of 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Wang2009"
-
-\end_inset
-
- is 
-\begin_inset Quotes eld
-\end_inset
-
-automatically inferring the colors of an virtual colored suit from a depth
- image
-\begin_inset Quotes erd
 \end_inset
 
 .
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Uebersax2011"
-
-\end_inset
-
-'s performance problem is hand segmentation.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Oikonomidis2011"
-
-\end_inset
-
- uses RGB data for segmentation as well as a powerful machine to achieve
- 15 Hz.
 \end_layout
 
 \begin_layout Section
-Shortcomings of other approaches
+Camera setup
 \end_layout
 
 \begin_layout Standard
-Usability - Tracking is fragile, marking is inconvenient or uncomfortable
-\end_layout
-
-\begin_layout Standard
-Robustness - Low accuracy or low variation?
-\end_layout
-
-\begin_layout Standard
-Depth camera - lighting is a major problem for RGB solutions
-\end_layout
-
-\begin_layout Standard
-Performance - Needs to meet or exceed framerate to match typing speeds (750
- CPM).
-\end_layout
-
-\begin_layout Standard
-Price of sensor - 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "hackenberg2011lightweight"
-
-\end_inset
-
- 
-\begin_inset Quotes eld
-\end_inset
-
-selected the SwissRanger SR4000 as it provides a resolution of 176 by 144
- pixels at a frame rate of 55 Hz
-\begin_inset Quotes erd
-\end_inset
-
-, which is a ToF camera.
- Notably, 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Smisek"
 
 \end_inset
 
- found the SR4000 to have an order of magnitude more error and jitter compared
- to the Kinect (in the 0.9 to 1.4 meter range), and costs $9000.
-\end_layout
-
-\begin_layout Standard
-Computational cost - targeting embedded GPU or FPGA (minimal cost, low power,
- small, light)
-\end_layout
-
-\begin_layout Standard
-What about 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Liwicki2009"
-
-\end_inset
-
-? Achieves high accuracy (80%) from low resolution, small amounts of data.
- Notably only targets a single signer and does not give performance information.
-\end_layout
-
-\begin_layout Section
-Approaches to Recognition
-\end_layout
-
-\begin_layout Standard
-needs further reading
-\end_layout
-
-\begin_layout Section
-Other Work of Interest
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Wang2011"
-
-\end_inset
-
- used a pair of webcams to achieve high-precision hand tracking and pinch
- gestures for a 3D assembly interface prototype.
- Advantages: no marking, easy to switch interfaces, handles occlusion well.
- Disadvantages: large database which is workstation-specific, only runs
- at 20 fps, 10 minutes of manual calibration.
-\end_layout
-
-\begin_layout Standard
-Uebersax has an awesome table.
+ gives a focal length of 6.1 mm.
 \end_layout
 
 \begin_layout Standard

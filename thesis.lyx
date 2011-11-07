@@ -91,8 +91,8 @@ customHeadersFooters
 \pdf_backref false
 \pdf_pdfusetitle true
 \pdf_quoted_options "pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
-\papersize a4paper
-\use_geometry false
+\papersize letterpaper
+\use_geometry true
 \use_amsmath 2
 \use_esint 1
 \use_mhchem 1
@@ -132,6 +132,10 @@ customHeadersFooters
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1.5in
+\topmargin 1.25in
+\rightmargin 1.25in
+\bottommargin 1.25in
 \secnumdepth 3
 \tocdepth 2
 \paragraph_separation skip
@@ -154,7 +158,8 @@ Kezben Hand Pose Recognizer
 \end_layout
 
 \begin_layout Subtitle
-Subtitle (if you have one)
+Toward Open-Source ASL Learning Software: Hand Part Identification with
+ Consumer Hardware
 \end_layout
 
 \begin_layout Author
@@ -212,6 +217,10 @@ California State University San Marcos
 \begin_inset Newline newline
 \end_inset
 
+College of Science and Mathematics
+\begin_inset Newline newline
+\end_inset
+
 Computer Science Department
 \begin_inset Newline newline
 \end_inset
@@ -226,7 +235,7 @@ Computer Science Department
 \begin_layout Lowertitleback
 
 \series bold
-Dean
+Advisor
 \series default
 
 \begin_inset VSpace smallskip
@@ -238,7 +247,7 @@ Dean
 
 Prof.
  Dr.
- xxx yyy
+ Shaun-inn Wu
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -248,7 +257,7 @@ Prof.
 
 
 \series bold
-Referees
+Project Committee
 \series default
 
 \begin_inset VSpace smallskip
@@ -260,7 +269,7 @@ Referees
 
 Prof.
  Dr.
- aaa bbb
+ David Schaafsma
 \begin_inset VSpace smallskip
 \end_inset
 
@@ -270,7 +279,7 @@ Prof.
 
 Prof.
  Dr.
- xxx yyy
+ Xiaoyu Zhang
 \begin_inset VSpace bigskip
 \end_inset
 
@@ -290,7 +299,7 @@ Date of the graduation (optional)
 \begin_inset Newline newline
 \end_inset
 
-xx.yy.zzzz
+9 December 2011
 \end_layout
 
 \begin_layout Dedication
@@ -795,8 +804,8 @@ restore the right header line
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "thesisExample"
-options "alpha"
+bibfiles "Master's Project,thesisExample,My Collection"
+options "acm"
 
 \end_inset
 

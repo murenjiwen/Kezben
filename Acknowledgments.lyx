@@ -4,15 +4,10 @@
 \begin_header
 \textclass scrbook
 \begin_preamble
-% enable calculations
-\usepackage{calc}
 
-% increase the bottom float placement fraction
-\renewcommand{\bottomfraction}{0.5}
 \end_preamble
 \options intoc,bibliography=totoc,index=totoc,BCOR10mm,captions=tableheading,titlepage,fleqn
 \use_default_options true
-\master thesis.lyx
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -37,7 +32,7 @@
 \paperfontsize 12
 \spacing single
 \use_hyperref true
-\pdf_title "Abstract"
+\pdf_title "Acknowledgments"
 \pdf_author "Uwe Stöhr"
 \pdf_bookmarks true
 \pdf_bookmarksnumbered true
@@ -72,7 +67,7 @@
 \quotes_language english
 \papercolumns 1
 \papersides 2
-\paperpagestyle plain
+\paperpagestyle fancy
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -83,7 +78,7 @@
 \begin_body
 
 \begin_layout Chapter*
-Abstract
+Acknowledgments
 \end_layout
 
 \begin_layout Standard
@@ -94,7 +89,7 @@ status collapsed
 
 
 \backslash
-addcontentsline{toc}{chapter}{Abstract} 
+addcontentsline{toc}{chapter}{Acknowledgments} 
 \end_layout
 
 \end_inset
@@ -113,26 +108,7 @@ adds table of contents entry
 \end_layout
 
 \begin_layout Standard
-Demonstrate the applicability of per-pixel body part estimation from single
- depth images to the human hand and wrist.
-\end_layout
-
-\begin_layout Standard
-Consumer access to environmental depth cameras became a reality with the
- release of the Microsoft Kinect.
- Personal camera + projector systems are a subject of ongoing research (
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Forutanpour2011"
-
-\end_inset
-
-).
- Current-generation embedded GPUs and FPGAs provide similar parallel-processing
- capabilities to the Xbox 360 GPU.
- The time has come for affordable, responsive ASL recognition and zero-impact
- haptic keyboard replacements.
- The core of either system will be a real-time hand pose estimator or recognizer.
+Thank you, thank your, thank you
 \end_layout
 
 \end_body
