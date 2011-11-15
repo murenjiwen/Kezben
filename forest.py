@@ -80,10 +80,9 @@ class Leaf(Node):
                 frequency[depth] = 1
         for depth in frequency:
             self.prediction[depth] = frequency[depth] / float(len(pixels))
-    def __str__(self):
-        return str(self.prediction)
-        
-        
+    def __repr__(self):
+        return repr(self.prediction)
+
 class DecisionTree():
     def train(self, training_set, entropy_threshold, max_depth, depth=0):
         if depth == max_depth:
@@ -127,7 +126,9 @@ class DecisionTree():
             else:
                 at = at.right
         return at
-            
+    def __repr__(self):
+        return repr(self.root)
+
     def __init__(self, training_set, entropy_threshold=0, max_depth=1):
         self.root = self.train(training_set, entropy_threshold, max_depth)
         
