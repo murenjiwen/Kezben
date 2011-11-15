@@ -161,24 +161,25 @@ class DecisionForest():
 
 if __name__ == '__main__':
     image_shape = (2,2)
-    image_count = 6
-    training_pixels = 20
-    depth_images = []
-    for i in range(image_count):
-        depth_images.append(np.random.random_integers(1,4,image_shape))
-    #depth_images = [np.array([[1,2],[2,1]])]*3
-    truth_images = depth_images
-    pixels = set()
-    for depth_image,truth_image in zip(depth_images,truth_images):
-        for i in range(depth_image.shape[0]):
-            for j in range(depth_image.shape[1]):
-                pixels.add(DepthPixel((i,j), depth_image, truth_image))
-    training_set = random.sample(pixels, training_pixels)
-    test_set = list(pixels - set(training_set))
-    print shannon(pixels), shannon(training_set), shannon(test_set)
-    training_sets = [training_set]*3
-    forest = DecisionForest(training_sets, max_depth = 5)
-    for pixel in test_set:
-        print pixel.depth(), forest.trees[0].test(pixel).prediction, forest.trees[1].test(pixel).prediction, forest.trees[2].test(pixel).prediction
-#    pylab.imshow(depth_images[0])
-    
+    image_count = 12
+    training_pixels = 40
+    set_count = 4
+    training_sets = []
+    for j in range(set_count):
+        depth_images = []
+        for i in range(image_count):
+            depth_images.append(np.random.random_integers(1,4,image_shape))
+        truth_images = depth_images
+        pixels = set()
+        for depth_image,truth_image in zip(depth_images,truth_images):
+            for i in range(depth_image.shape[0]):
+                for j in range(depth_image.shape[1]):
+                    pixels.add(DepthPixel((i,j), depth_image, truth_image))
+        training_set = random.sample(pixels, training_pixels)
+        training_sets.append(training_set)
+    forest = DecisionForest(training_sets[1:], max_depth = 4)
+    correct = 0.0
+    for pixel in training_sets[0]:
+        if pixel.depth() == forest.classify(pixel):
+            correct += 1.0
+    print "Accuracy:", correct/len(training_sets[0])
