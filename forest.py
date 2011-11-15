@@ -136,8 +136,27 @@ class DecisionForest():
         self.trees=[]
         for training_set in training_sets:
             self.trees.append(DecisionTree(training_set, max_depth = max_depth))
-        
-        
+    def test(self, pixel):
+        result = {}
+        for tree in self.trees:
+            prediction = tree.test(pixel).prediction
+            for depth in prediction:
+                if depth in result:
+                    result[depth] += prediction[depth]
+                else:
+                    result[depth] = prediction[depth]
+        for depth in result:
+            result[depth] = result[depth]/len(self.trees)
+        return result
+    def classify(self, pixel):
+        maximum = 0
+        label = None
+        classification = self.test(pixel)
+        for depth in classification:
+            if classification[depth] > maximum:
+                maximum = classification[depth]
+                label = depth
+        return label
 
 if __name__ == '__main__':
     image_shape = (2,2)
