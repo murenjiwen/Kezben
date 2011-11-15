@@ -50,7 +50,7 @@ def shannon(pixels):
 
 class Node:
     def __init__(self):
-        self.pixels = set();
+        self.pixels = set()
 
 class Split(Node):
     def __init__(self, u_pxmm=(0,0), v_pxmm=(0,0), threshold_mm=1, left=None, right=None):
