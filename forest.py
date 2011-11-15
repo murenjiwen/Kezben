@@ -105,7 +105,7 @@ class DecisionTree():
                     right.add(pixel)
             if len(left) == 0 or len(right) == 0:
                 continue
-            gain = shannon(training_set) - (shannon(left)/len(left) + shannon(right)/len(right))/len(training_set)
+            gain = shannon(training_set) - (shannon(left)*len(left) + shannon(right)*len(right))/len(training_set)
             if gain > max_gain:
                 max_gain = gain
                 best_split = split
