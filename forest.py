@@ -91,9 +91,9 @@ class DecisionTree():
         best_split = None
         best_left, best_right = None, None
         for i in xrange(100):
-            u_pxmm = 5*(np.array((random.random(),random.random()))-0.5)
-            v_pxmm = 5*(np.array((random.random(),random.random()))-0.5)
-            tau_mm = random.randint(-2,2)
+            u_pxmm = 10*(np.array((random.random(),random.random()))-0.5)
+            v_pxmm = 10*(np.array((random.random(),random.random()))-0.5)
+            tau_mm = random.randint(-5,5)
             split = Split(u_pxmm, v_pxmm, tau_mm)
             left = set()
             right = set()
