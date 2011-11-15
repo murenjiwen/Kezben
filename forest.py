@@ -8,7 +8,7 @@ import random
 from math import log
 
 
-infinity = 4
+infinity = 16
 
 class DepthPixel:
     def __add__(self, other):
