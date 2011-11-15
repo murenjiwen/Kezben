@@ -46,7 +46,7 @@ def shannon(pixels):
         p_i = frequency[depth] / n
         result += p_i*log(p_i,2)
     return -result
-        
+
 
 class Node:
     def __init__(self):
@@ -63,10 +63,10 @@ class Split(Node):
         depth_x_mm = pixel.depth()
         return pixel.depth_at(self.u_pxmm/depth_x_mm) - pixel.depth_at(self.v_pxmm/depth_x_mm)
     def is_left(self, pixel):
-        return self.feature(pixel) < self.threshold_mm    
+        return self.feature(pixel) < self.threshold_mm
     def __repr__(self):
         return "Split(%r,%r,%r,%r,%r))" % (self.u_pxmm, self.v_pxmm, self.threshold_mm, self.left, self.right)
-        
+
 class Leaf(Node):
     def __init__(self, pixels):
         Node.__init__(self)
@@ -131,7 +131,7 @@ class DecisionTree():
 
     def __init__(self, training_set, entropy_threshold=0, max_depth=1):
         self.root = self.train(training_set, entropy_threshold, max_depth)
-        
+
 class DecisionForest():
     def __init__(self, training_sets, tree_count = 1, max_depth = 1):
         self.trees=[]
