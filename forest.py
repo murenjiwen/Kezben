@@ -171,7 +171,7 @@ if __name__ == '__main__':
         for depth_image,truth_image in zip(depth_images,truth_images):
             for i in range(depth_image.shape[0]):
                 for j in range(depth_image.shape[1]):
-                    pixels.add(DepthPixel((i,j), depth_image, truth_image))
+                    pixels.add(DepthPixel(np.array((i,j)), depth_image, truth_image))
         training_set = random.sample(pixels, training_pixels)
         training_sets.append(training_set)
     forest = DecisionForest(training_sets[1:], max_depth = 4)
