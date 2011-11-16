@@ -32,21 +32,22 @@ class DepthPixel:
     def __str__(self):
         return "DepthPixel(%s, %s)" % (self.coordinate, self.depth())
 
-def shannon(pixels):
+def shannon(values):
     frequency = {}
-    for pixel in pixels:
-        depth = pixel.depth()
-        if depth in frequency:
-            frequency[depth] += 1
+    for value in values:
+        if value in frequency:
+            frequency[value] += 1
         else:
-            frequency[depth] = 1
+            frequency[value] = 1
     result = 0
-    n = float(len(pixels))
-    for depth in frequency:
-        p_i = frequency[depth] / n
+    n = float(len(values))
+    for value in frequency:
+        p_i = frequency[value] / n
         result += p_i*log(p_i,2)
     return -result
 
+def shannon_depthpixels(pixels):
+    return shannon(map(lambda x : x.depth(), pixels))
 
 class Node:
     def __init__(self):
@@ -104,7 +105,7 @@ class DecisionTree():
                     right.add(pixel)
             if len(left) == 0 or len(right) == 0:
                 continue
-            gain = shannon(training_set) - (shannon(left)*len(left) + shannon(right)*len(right))/len(training_set)
+            gain = shannon_depthpixels(training_set) - (shannon_depthpixels(left)*len(left) + shannon_depthpixels(right)*len(right))/len(training_set)
             if gain > max_gain:
                 max_gain = gain
                 best_split = split
