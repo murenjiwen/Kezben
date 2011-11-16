@@ -81,7 +81,8 @@ class Leaf(Node):
 
 class DecisionTree():
     def train(self, training_set, max_depth, depth=0, entropy_threshold = 0):
-        if depth == max_depth:
+        entropy = shannon_depthpixels(training_set)
+        if depth == max_depth or entropy <= entropy_threshold:
             return Leaf(training_set)
         max_gain = 0
         best_split = None
@@ -100,7 +101,7 @@ class DecisionTree():
                     right.add(pixel)
             if len(left) == 0 or len(right) == 0:
                 continue
-            gain = shannon_depthpixels(training_set) - (shannon_depthpixels(left)*len(left) + shannon_depthpixels(right)*len(right))/len(training_set)
+            gain = entropy - (shannon_depthpixels(left)*len(left) + shannon_depthpixels(right)*len(right))/len(training_set)
             if gain > max_gain:
                 max_gain = gain
                 best_split = split
