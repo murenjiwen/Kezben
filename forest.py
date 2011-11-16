@@ -15,11 +15,11 @@ class DepthPixel:
     def depth(self):
         return self.depth_image[tuple(self.coordinate)]
     def depth_at(self, offset):
-        coordinate = tuple(self + offset)
-        for i, i_max in zip(coordinate, depth_image.shape):
-            if i < 0 or i >= i_max:
-                return infinity
-        return self.depth_image[coordinate]
+        coordinate = self + offset
+        try:
+            return self.depth_image[tuple(coordinate)]
+        except IndexError:
+            return infinity
     def truth(self):
         return self.truth_image[tuple(self.coordinate)]
     def __repr__(self):
