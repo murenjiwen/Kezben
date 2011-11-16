@@ -1,9 +1,4 @@
 import numpy as np
-import scipy
-import pylab
-import pymorph
-import mahotas
-from scipy import ndimage
 import random
 from math import log
 
