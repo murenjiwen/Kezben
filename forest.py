@@ -80,7 +80,7 @@ class Leaf(Node):
         return repr(self.prediction)
 
 class DecisionTree():
-    def train(self, training_set, entropy_threshold, max_depth, depth=0):
+    def train(self, training_set, max_depth, depth=0, entropy_threshold = 0):
         if depth == max_depth:
             return Leaf(training_set)
         max_gain = 0
@@ -109,8 +109,8 @@ class DecisionTree():
 #            print "Max gain: ", max_gain
 #            print "Left: %s" % map(lambda x: x.depth(), best_left)
 #            print "Right: %s" % map(lambda x: x.depth(), best_right)
-            best_split.left = self.train(best_left, entropy_threshold, max_depth, depth + 1)
-            best_split.right = self.train(best_right, entropy_threshold, max_depth, depth + 1)
+            best_split.left = self.train(best_left, max_depth, depth + 1, entropy_threshold)
+            best_split.right = self.train(best_right, max_depth, depth + 1, entropy_threshold)
             return best_split
         else:
             return Leaf(training_set)
@@ -126,7 +126,7 @@ class DecisionTree():
         return repr(self.root)
 
     def __init__(self, training_set, entropy_threshold=0, max_depth=1):
-        self.root = self.train(training_set, entropy_threshold, max_depth)
+        self.root = self.train(training_set, max_depth, 0, entropy_threshold)
 
 class DecisionForest():
     def __init__(self, training_sets, tree_count = 1, max_depth = 1):
