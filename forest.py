@@ -21,7 +21,7 @@ class DepthPixel:
                 return infinity
         return self.depth_image[coordinate]
     def truth(self):
-        return self.truth_image[self.coordinate]
+        return self.truth_image[tuple(self.coordinate)]
     def __repr__(self):
         return "DepthPixel(%r,\n%r,\n%r)\n" % (self.coordinate, self.depth_image, self.truth_image)
     def __str__(self):
@@ -42,7 +42,7 @@ def shannon(values):
     return -result
 
 def shannon_depthpixels(pixels):
-    return shannon(map(lambda x : x.depth(), pixels))
+    return shannon(map(lambda x : x.truth(), pixels))
 
 class Node:
     def __init__(self):
@@ -69,13 +69,13 @@ class Leaf(Node):
         self.prediction = {}
         frequency = {}
         for pixel in pixels:
-            depth = pixel.depth()
-            if depth in frequency:
-                frequency[depth] += 1
+            truth = pixel.truth()
+            if truth in frequency:
+                frequency[truth] += 1
             else:
-                frequency[depth] = 1
-        for depth in frequency:
-            self.prediction[depth] = frequency[depth] / float(len(pixels))
+                frequency[truth] = 1
+        for truth in frequency:
+            self.prediction[truth] = frequency[truth] / float(len(pixels))
     def __repr__(self):
         return repr(self.prediction)
 
@@ -176,6 +176,6 @@ if __name__ == '__main__':
     forest = DecisionForest(training_sets[1:], max_depth = 4)
     correct = 0.0
     for pixel in training_sets[0]:
-        if pixel.depth() == forest.classify(pixel):
+        if pixel.truth() == forest.classify(pixel):
             correct += 1.0
     print "Accuracy:", correct/len(training_sets[0])
