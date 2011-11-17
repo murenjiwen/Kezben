@@ -130,10 +130,10 @@ class DecisionTree():
         self.root = self.train(training_set, max_depth, 0, entropy_threshold)
 
 class DecisionForest():
-    def __init__(self, training_sets, tree_count = 1, max_depth = 1):
+    def __init__(self, training_sets, tree_count = 1, **kwargs):
         self.trees=[]
         for training_set in training_sets:
-            self.trees.append(DecisionTree(training_set, max_depth = max_depth))
+            self.trees.append(DecisionTree(training_set, **kwargs))
     def test(self, pixel):
         result = {}
         for tree in self.trees:
