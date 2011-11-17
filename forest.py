@@ -88,8 +88,8 @@ class DecisionTree():
         best_split = None
         best_left, best_right = None, None
         for i in xrange(100):
-            u_pxmm = 10*(np.array((random.random(),random.random()))-0.5)
-            v_pxmm = 10*(np.array((random.random(),random.random()))-0.5)
+            u_pxmm = 200*(np.array((random.random(),random.random()))-0.5)
+            v_pxmm = 200*(np.array((random.random(),random.random()))-0.5)
             tau_mm = random.randint(-5,5)
             split = Split(u_pxmm, v_pxmm, tau_mm)
             left = set()
@@ -157,9 +157,9 @@ class DecisionForest():
         return label
 
 if __name__ == '__main__':
-    image_shape = (2,2)
+    image_shape = (64,48)
     image_count = 12
-    training_pixels = 40
+    training_pixels = 400
     set_count = 4
     training_sets = []
     for j in range(set_count):
