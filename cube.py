@@ -5,6 +5,14 @@ import OpenEXR
 import Imath
 import array
 
+def shannon_array(a):
+    entropy=0.0
+    n=float(a.size)
+    for value in np.unique(a):
+        p_value = np.sum(a == value)/n
+        entropy += -p_value*np.log2(p_value)
+    return entropy
+
 input_file = OpenEXR.InputFile("cube.exr")
 print input_file.header()
 
@@ -17,3 +25,6 @@ sample_pixels = np.array(random.sample(xrange(128*128),100))
 sample_depths = depth.flat[sample_pixels]
 sample_truths = truth.flat[sample_pixels]
 sample_coords = np.array([sample_pixels/128,sample_pixels%128])
+
+
+print shannon_array(truth), shannon_array(sample_truths)
