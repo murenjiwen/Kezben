@@ -119,7 +119,6 @@ class DecisionTree():
     def train(self, pixels, max_depth, depth=0, entropy_threshold=0):
         entropy = shannon_array(pixels)
         if depth == max_depth or entropy <= entropy_threshold:
-            self.current_depth = max(depth, self.current_depth)
             return Leaf(pixels)
         max_gain = 0
         best_split = None
