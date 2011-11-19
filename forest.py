@@ -27,26 +27,13 @@ truth_images = depth_images
 class DepthPixel:
     def __init__(self, row):
         self.row = row
-        self.coordinate = row[1:]
-        self.depth_image = depth_images[row[0]]
-        self.truth_image = truth_images[row[0]]
-
-    def depth(self):
-        return self.depth_image[tuple(self.coordinate)]
-
-    def depth_at(self, offset):
-        target = (self.coordinate + offset).astype(np.int)
-        target = np.array((target[0].clip(0, image_shape[0] + 1), target[1].clip(0, image_shape[1] + 1)))
-        return self.depth_image[tuple(target)]
-
-    def truth(self):
-        return self.truth_image[tuple(self.coordinate)]
+        self.truth = truth_images[tuple(row)]
 
     def __repr__(self):
-        return "DepthPixel(%r, \n%r, \n%r)\n" % (self.coordinate, self.depth_image, self.truth_image)
+        return "DepthPixel(%r)" % (self.row)
 
     def __str__(self):
-        return "DepthPixel(%s, %s)" % (self.coordinate, self.depth())
+        return "DepthPixel(%s)" % (self.row)
 
 
 def shannon_array(a):
@@ -58,26 +45,19 @@ def shannon_array(a):
     return entropy
 
 
-class Node:
-    def __init__(self):
-        self.pixels = set()
-
-
-class Split(Node):
-    def __init__(self, u_pxmm=np.array((0, 0)), v_pxmm=np.array((0, 0)), threshold_mm=0, left=None, right=None):
-        Node.__init__(self)
-        self.left = left
-        self.right = right
-        self.u_pxmm, self.v_pxmm = u_pxmm.reshape((2, 1)), v_pxmm.reshape((2, 1))
+class Split:
+    def __init__(self,
+                 u_pxmm=np.array((0, 0)),
+                 v_pxmm=np.array((0, 0)),
+                 threshold_mm=0):
+        self.left = None
+        self.right = None
+        self.u_pxmm = u_pxmm.reshape((2, 1))
+        self.v_pxmm = v_pxmm.reshape((2, 1))
         self.threshold_mm = threshold_mm
 
-    def feature(self, pixel):
-        depth_x_mm = pixel.depth()
-        du_mm = pixel.depth_at((self.u_pxmm.reshape(2) / depth_x_mm).astype(np.int))
-        dv_mm = pixel.depth_at((self.v_pxmm.reshape(2) / depth_x_mm).astype(np.int))
-        return du_mm - dv_mm
-
     def features(self, pixels, images):
+        pixels = pixels.reshape((3, -1))    # add a dimension if necessary
         depths = images[pixels[0], 1 + pixels[1], 1 + pixels[2]].reshape((1, -1))
         u_px = (pixels[1:] + self.u_pxmm / depths).astype(np.int)
         v_px = (pixels[1:] + self.v_pxmm / depths).astype(np.int)
@@ -87,9 +67,6 @@ class Split(Node):
                                  v_px[1].clip(0, image_shape[1] + 1)]
         return du_mm - dv_mm
 
-    def is_left(self, pixel):
-        return self.feature(pixel) < self.threshold_mm
-
     def are_left(self, pixels, images):
         return self.features(pixels, images) < self.threshold_mm
 
@@ -97,13 +74,12 @@ class Split(Node):
         return "Split(%r, %r, %r, %r, %r))" % (self.u_pxmm, self.v_pxmm, self.threshold_mm, self.left, self.right)
 
 
-class Leaf(Node):
+class Leaf:
     def __init__(self, pixels):
-        Node.__init__(self)
         self.prediction = {}
         frequency = {}
         for pixel in pixels:
-            truth = pixel.truth()
+            truth = pixel.truth
             if truth in frequency:
                 frequency[truth] += 1
             else:
@@ -157,7 +133,7 @@ class DecisionTree():
     def test(self, pixel):
         at = self.root
         while at.__class__ is not Leaf:
-            if at.is_left(pixel):
+            if at.are_left(pixel.row, depth_images):
                 at = at.left
             else:
                 at = at.right
@@ -216,7 +192,7 @@ if __name__ == '__main__':
     forest = DecisionForest(np.array(training_sets[1:]), max_depth=5, entropy_threshold=0)
     correct = 0.0
     for pixel in training_sets[0]:
-        if pixel.truth() == forest.classify(pixel):
+        if pixel.truth == forest.classify(pixel):
             correct += 1.0
     test_pixel_count = len(training_sets[0])
     incorrect = test_pixel_count - correct
