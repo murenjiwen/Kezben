@@ -139,9 +139,6 @@ class DecisionTree():
                 best_split = split
                 best_left, best_right = left, right
         if max_gain > entropy_threshold:
-#            print "Max gain: ", max_gain
-#            print "Left: %s" % map(lambda x: x.depth(), best_left)
-#            print "Right: %s" % map(lambda x: x.depth(), best_right)
             best_split.left = self.train(np.array(best_left),
                                          max_depth,
                                          depth + 1,
