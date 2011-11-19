@@ -10,19 +10,19 @@ from forest import shannon_array
 def get_maps(filename):
     input_file = OpenEXR.InputFile("cube.exr")
     FLOAT = Imath.PixelType(Imath.PixelType.FLOAT)
-    (R,G,B) = [np.array(array.array('f', input_file.channel(Chan, FLOAT))) for Chan in ("R", "G", "B") ]
-    truth = np.array(R+2*G+3*B).astype(np.int)
+    (R, G, B) = [np.array(array.array('f', input_file.channel(channel, FLOAT)))
+        for channel in ("R", "G", "B")]
+    truth = np.array(R + (2 * G) + (3 * B)).astype(np.int)
     depth = np.array(array.array('f', input_file.channel("Z", FLOAT)))
-    for a in truth,depth:
-        a.reshape(128,128)
+    for a in truth, depth:
+        a.reshape(128, 128)
     return truth, depth
-    
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     truth, depth = get_maps("cube.exr")
-    sample_pixels = np.array(random.sample(xrange(128*128),100))
+    sample_pixels = np.array(random.sample(xrange(128 * 128), 100))
     sample_depths = depth.flat[sample_pixels]
     sample_truths = truth.flat[sample_pixels]
-    sample_coords = np.array([sample_pixels/128,sample_pixels%128])
+    sample_coords = np.array([sample_pixels / 128, sample_pixels % 128])
     print shannon_array(depth), shannon_array(truth)
     print shannon_array(sample_depths), shannon_array(sample_truths)
