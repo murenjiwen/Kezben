@@ -6,7 +6,7 @@ trees = 3
 image_shape = np.array((128,128))
 image_count = 4000
 min_depth, max_depth = 1,16
-infinity = 2*max_depth
+infinity = 2 * max_depth
 candidate_count = 100
 
 
@@ -17,9 +17,11 @@ def add_border(image):
         image = np.concatenate((border, image, border), axis)
     return image
 
-depth_images = np.random.random_integers(min_depth, max_depth, (image_count, ) + tuple(image_shape))
-depth_images = add_border(depth_images)[1:-1]
 
+depth_images = np.random.random_integers(min_depth,
+                                         max_depth,
+                                         (image_count, ) + tuple(image_shape))
+depth_images = add_border(depth_images)[1:-1]
 min_truth, max_truth = min_depth, max_depth
 truth_images = depth_images
 
@@ -58,7 +60,9 @@ class Split:
 
     def features(self, pixels, images):
         pixels = pixels.reshape((3, -1))    # add a dimension if necessary
-        depths = images[pixels[0], 1 + pixels[1], 1 + pixels[2]].reshape((1, -1))
+        depths = images[pixels[0],
+                        1 + pixels[1],
+                        1 + pixels[2]].reshape((1, -1))    # add a dimension
         u_px = (pixels[1:] + self.u_pxmm / depths).astype(np.int)
         v_px = (pixels[1:] + self.v_pxmm / depths).astype(np.int)
         du_mm = images[pixels[0], u_px[0].clip(0, image_shape[0] + 1),
@@ -71,7 +75,11 @@ class Split:
         return self.features(pixels, images) < self.threshold_mm
 
     def __repr__(self):
-        return "Split(%r, %r, %r, %r, %r))" % (self.u_pxmm, self.v_pxmm, self.threshold_mm, self.left, self.right)
+        return "Split(%r, %r, %r, %r, %r))" % (self.u_pxmm,
+                                               self.v_pxmm,
+                                               self.threshold_mm,
+                                               self.left,
+                                               self.right)
 
 
 class Leaf:
@@ -108,18 +116,24 @@ class DecisionTree():
         candidates = np.hstack([parameters_theta, thresholds_tau])
         for candidate in candidates:
             split = Split(candidate[:2], candidate[2:4], candidate[4])
-            division = split.are_left(np.array(map(lambda x: x.row, pixels)).transpose(), depth_images)
+            pixel_rows = np.array(map(lambda x: x.row, pixels)).transpose()
+            division = split.are_left(pixel_rows, depth_images)
             if division.all() or (-division).all():
                 continue
             left = pixels[division]
             right = pixels[-division]
-            left_rows = np.array(map(lambda x: x.row, left)).transpose()
-            left_truth = truth_images[left_rows[0], left_rows[1], left_rows[2]]
+            left_rows = pixel_rows[:, division]
+            left_truth = truth_images[left_rows[0],
+                                      left_rows[1],
+                                      left_rows[2]]
             entropy_left = shannon_array(left_truth)
-            right_rows = np.array(map(lambda x: x.row, right)).transpose()
-            right_truth = truth_images[right_rows[0], right_rows[1], right_rows[2]]
+            right_rows = pixel_rows[:, -division]
+            right_truth = truth_images[right_rows[0],
+                                       right_rows[1],
+                                       right_rows[2]]
             entropy_right = shannon_array(right_truth)
-            gain = entropy - (entropy_left * left_truth.size + entropy_right * right_truth.size) / len(pixels)
+            gain = entropy - (entropy_left * left_truth.size
+                              + entropy_right * right_truth.size) / len(pixels)
             if gain > max_gain:
                 max_gain = gain
                 best_split = split
@@ -128,8 +142,14 @@ class DecisionTree():
 #            print "Max gain: ", max_gain
 #            print "Left: %s" % map(lambda x: x.depth(), best_left)
 #            print "Right: %s" % map(lambda x: x.depth(), best_right)
-            best_split.left = self.train(np.array(best_left), max_depth, depth + 1, entropy_threshold)
-            best_split.right = self.train(np.array(best_right), max_depth, depth + 1, entropy_threshold)
+            best_split.left = self.train(np.array(best_left),
+                                         max_depth,
+                                         depth + 1,
+                                         entropy_threshold)
+            best_split.right = self.train(np.array(best_right),
+                                          max_depth,
+                                          depth + 1,
+                                          entropy_threshold)
             return best_split
         else:
             return Leaf(pixels)
@@ -183,17 +203,25 @@ if __name__ == '__main__':
     training_sets = []
     images_per_tree = image_count / (trees + 1)
     for j in range(trees + 1):
-        pixel_indices = np.arange(images_per_tree * image_shape[1] * image_shape[0])
-        image_indices = pixel_indices / image_shape[1] / image_shape[0] + j * images_per_tree
+        pixel_indices = np.arange(images_per_tree
+                                  * image_shape[1]
+                                  * image_shape[0])
+        image_indices = (pixel_indices
+                         / image_shape[1]
+                         / image_shape[0]) + j * images_per_tree
         x_coords = ((pixel_indices / image_shape[1]) % image_shape[0]) + 1
         y_coords = (pixel_indices % image_shape[1]) + 1
-        pixel_array = np.vstack([image_indices, x_coords, y_coords]).transpose()
+        pixel_array = np.vstack([image_indices,
+                                 x_coords,
+                                 y_coords]).transpose()
         training_array = random.sample(pixel_array, training_pixels)
         sample_pixels = []
         for row in training_array:
             sample_pixels.append(DepthPixel(row))
         training_sets.append(sample_pixels)
-    forest = DecisionForest(np.array(training_sets[1:]), max_depth=5, entropy_threshold=0)
+    forest = DecisionForest(np.array(training_sets[1:]),
+                            max_depth=5,
+                            entropy_threshold=0)
     correct = 0.0
     for pixel in training_sets[0]:
         if pixel.truth == forest.classify(pixel):
