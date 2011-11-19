@@ -198,9 +198,10 @@ if __name__ == '__main__':
     min_depth, max_depth = 1, 4
     infinity = 2 * max_depth
 
+    depth_images_shape = (image_count, ) + tuple(image_shape)
     depth_images = np.random.random_integers(min_depth,
                                              max_depth,
-                                             (image_count, ) + tuple(image_shape))
+                                             depth_images_shape)
     depth_images = add_border(depth_images, infinity)[1:-1]
     min_truth, max_truth = min_depth, max_depth
     truth_images = depth_images
