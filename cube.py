@@ -16,12 +16,13 @@ def get_maps(filename):
     for a in truth,depth:
         a.reshape(128,128)
     return truth, depth
+    
+if __name__ == '__main__':
 
-truth, depth = get_maps("cube.exr")
-sample_pixels = np.array(random.sample(xrange(128*128),100))
-sample_depths = depth.flat[sample_pixels]
-sample_truths = truth.flat[sample_pixels]
-sample_coords = np.array([sample_pixels/128,sample_pixels%128])
-
-
-print shannon_array(truth), shannon_array(sample_truths)
+    truth, depth = get_maps("cube.exr")
+    sample_pixels = np.array(random.sample(xrange(128*128),100))
+    sample_depths = depth.flat[sample_pixels]
+    sample_truths = truth.flat[sample_pixels]
+    sample_coords = np.array([sample_pixels/128,sample_pixels%128])
+    print shannon_array(depth), shannon_array(truth)
+    print shannon_array(sample_depths), shannon_array(sample_truths)
