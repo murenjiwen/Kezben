@@ -4,14 +4,8 @@ import random
 import OpenEXR
 import Imath
 import array
+from forest import shannon_array
 
-def shannon_array(a):
-    entropy=0.0
-    n=float(a.size)
-    for value in np.unique(a):
-        p_value = np.sum(a == value)/n
-        entropy += -p_value*np.log2(p_value)
-    return entropy
 
 def get_maps(filename):
     input_file = OpenEXR.InputFile("cube.exr")
