@@ -1,13 +1,13 @@
 import numpy as np
 import random
 
-training_pixels = 400
-trees = 3
-image_shape = np.array((128,128))
-image_count = 4000
-min_depth, max_depth = 1,16
+training_pixels = 32
+trees = 2
+image_shape = np.array((2, 2))
+image_count = 24
+min_depth, max_depth = 1, 4
 infinity = 2 * max_depth
-candidate_count = 100
+candidate_count = 200
 
 
 def add_border(image):
