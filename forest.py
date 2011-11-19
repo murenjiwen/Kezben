@@ -3,6 +3,13 @@ import random
 from math import log
 
 
+def add_border(image):
+    for axis in range(len(image.shape)):
+        shape = image.shape[:axis]+(1,)+image.shape[axis+1:]
+        border = infinity*np.ones(shape)
+        image = np.concatenate((border,image,border),axis)
+    return image
+
 infinity = 16
 
 class DepthPixel:
