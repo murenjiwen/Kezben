@@ -194,4 +194,9 @@ if __name__ == '__main__':
     for pixel in training_sets[0]:
         if pixel.truth() == forest.classify(pixel):
             correct += 1.0
-    print "Accuracy:", correct/len(training_sets[0])
+    test_pixel_count = len(training_sets[0])
+    incorrect = test_pixel_count - correct
+    score = correct - incorrect/(max_truth-min_truth)
+    print "Accuracy:", correct/test_pixel_count
+    print "Score:", score
+    print "Adjusted Accuracy:", score/test_pixel_count
