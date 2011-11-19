@@ -7,6 +7,7 @@ image_shape = np.array((128,128))
 image_count = 4000
 min_depth, max_depth = 1,16
 infinity = 2*max_depth
+candidate_count = 100
 
 
 def add_border(image):
@@ -99,8 +100,12 @@ class DecisionTree():
         best_split = None
         best_left, best_right = None, None
         tau_limit = infinity - min_depth
-        candidates = np.hstack([2 * max(image_shape) * max_depth * (np.random.random((100, 4)) - 0.5),
-                                np.random.random_integers(-tau_limit, tau_limit, (100, 1))])
+        parameters_theta = 2 * max(image_shape) * max_depth * (
+                               np.random.random((candidate_count, 4)) - 0.5)
+        thresholds_tau = np.random.random_integers(-tau_limit,
+                                                   tau_limit,
+                                                   (candidate_count, 1))
+        candidates = np.hstack([parameters_theta, thresholds_tau])
         for candidate in candidates:
             split = Split(candidate[:2], candidate[2:4], candidate[4])
             division = split.are_left(np.array(map(lambda x: x.row, pixels)).transpose(), depth_images)
