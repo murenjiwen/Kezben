@@ -58,25 +58,6 @@ def shannon_array(a):
     return entropy
 
 
-def shannon(values):
-    frequency = {}
-    for value in values:
-        if value in frequency:
-            frequency[value] += 1
-        else:
-            frequency[value] = 1
-    result = 0
-    n = float(len(values))
-    for value in frequency:
-        p_i = frequency[value] / n
-        result += p_i * log(p_i, 2)
-    return -result
-
-
-def shannon_depthpixels(pixels):
-    return shannon(map(lambda x: x.truth(), pixels))
-
-
 class Node:
     def __init__(self):
         self.pixels = set()
@@ -136,7 +117,7 @@ class Leaf(Node):
 
 class DecisionTree():
     def train(self, pixels, max_depth, depth=0, entropy_threshold=0):
-        entropy = shannon_depthpixels(pixels)
+        entropy = shannon_array(pixels)
         if depth == max_depth or entropy <= entropy_threshold:
             self.current_depth = max(depth, self.current_depth)
             return Leaf(pixels)
