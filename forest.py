@@ -1,6 +1,5 @@
 import numpy as np
 import random
-from math import log
 
 training_pixels = 400
 trees = 3
