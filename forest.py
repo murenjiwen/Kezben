@@ -10,18 +10,6 @@ def add_border(image, border_value):
     return image
 
 
-class DepthPixel:
-    def __init__(self, row, truth_images):
-        self.row = row
-        self.truth = truth_images[tuple(row)]
-
-    def __repr__(self):
-        return "DepthPixel(%r)" % (self.row)
-
-    def __str__(self):
-        return "DepthPixel(%s)" % (self.row)
-
-
 def shannon_array(a):
     entropy = 0.0
     n = float(a.size)
@@ -67,11 +55,11 @@ class Split:
 
 
 class Leaf:
-    def __init__(self, pixels):
+    def __init__(self, pixels, truth_images):
         self.prediction = {}
         frequency = {}
         for pixel in pixels:
-            truth = pixel.truth
+            truth = truth_images[pixel[0], pixel[1], pixel[2]]
             if truth in frequency:
                 frequency[truth] += 1
             else:
@@ -88,7 +76,7 @@ class DecisionTree():
               max_depth, candidate_count, entropy_threshold=0, depth=0):
         entropy = shannon_array(pixels)
         if depth == max_depth or entropy <= entropy_threshold:
-            return Leaf(pixels)
+            return Leaf(pixels, truth_images)
         max_gain = 0
         best_split = None
         best_left, best_right = None, None
@@ -99,9 +87,9 @@ class DecisionTree():
                                                    tau_limit,
                                                    (candidate_count, 1))
         candidates = np.hstack([parameters_theta, thresholds_tau])
+        pixel_rows = pixels.transpose()
         for candidate in candidates:
             split = Split(candidate[:2], candidate[2:4], candidate[4])
-            pixel_rows = np.array(map(lambda x: x.row, pixels)).transpose()
             division = split.are_left(pixel_rows, depth_images, image_shape)
             if division.all() or (-division).all():
                 continue
@@ -144,12 +132,12 @@ class DecisionTree():
                                           depth + 1)
             return best_split
         else:
-            return Leaf(pixels)
+            return Leaf(pixels, truth_images)
 
     def test(self, pixel, *args, **kwargs):
         at = self.root
         while at.__class__ is not Leaf:
-            if at.are_left(pixel.row, *args, **kwargs):
+            if at.are_left(pixel, *args, **kwargs):
                 at = at.left
             else:
                 at = at.right
@@ -222,10 +210,8 @@ if __name__ == '__main__':
         pixel_array = np.vstack([image_indices,
                                  x_coords,
                                  y_coords]).transpose()
-        training_array = random.sample(pixel_array, training_pixels)
-        sample_pixels = []
-        for row in training_array:
-            sample_pixels.append(DepthPixel(row, truth_images))
+        training_list = random.sample(pixel_array, training_pixels)
+        sample_pixels = np.array(training_list)
         training_sets.append(sample_pixels)
     forest = DecisionForest(np.array(training_sets[1:]),
                             depth_images,
@@ -237,7 +223,7 @@ if __name__ == '__main__':
                             entropy_threshold=0)
     correct = 0.0
     for pixel in training_sets[0]:
-        if pixel.truth == forest.classify(pixel, depth_images, image_shape):
+        if truth_images[pixel[0], pixel[1], pixel[2]] == forest.classify(pixel, depth_images, image_shape):
             correct += 1.0
     test_pixel_count = len(training_sets[0])
     incorrect = test_pixel_count - correct
