@@ -7,14 +7,16 @@ import forest
 
 
 def get_maps(filename):
-    input_file = OpenEXR.InputFile("cube.exr")
+    input_file = OpenEXR.InputFile(filename)
     FLOAT = Imath.PixelType(Imath.PixelType.FLOAT)
     (R, G, B) = [np.array(array.array('f', input_file.channel(channel, FLOAT)))
         for channel in ("R", "G", "B")]
     truth = np.array(R + (2 * G) + (3 * B)).astype(np.int)
     depth = np.array(array.array('f', input_file.channel("Z", FLOAT)))
-    truth = truth.reshape(128, 128)
-    depth = depth.reshape(128, 128)
+    window = input_file.header()['dataWindow']
+    shape = (window.max.y - window.min.y + 1, window.max.x - window.min.x + 1)
+    truth = truth.reshape(shape)
+    depth = depth.reshape(shape)
     return truth, depth
 
 if __name__ == '__main__':
