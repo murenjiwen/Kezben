@@ -42,8 +42,8 @@ if __name__ == '__main__':
                                                   training_pixels)
         sample_depths = depth_map.flat[sample_pixels]
         sample_truths = truth_map.flat[sample_pixels]
-        x_coords = (sample_pixels / image_shape[0]) + 1
-        y_coords = (sample_pixels % image_shape[0]) + 1
+        x_coords = (sample_pixels / image_shape[-1]) + 1
+        y_coords = (sample_pixels % image_shape[-1]) + 1
 
         sample_coords = np.vstack([np.zeros(training_pixels, dtype=np.int),
                                    x_coords,
@@ -61,8 +61,8 @@ if __name__ == '__main__':
 
     test_pixels = np.arange(0, truth_map.size)
     test_set = np.vstack([np.zeros(test_pixels.size, dtype=np.int),
-                                   (test_pixels / image_shape[0]) + 1,
-                                   (test_pixels % image_shape[0]) + 1]).transpose()
+                                   (test_pixels / image_shape[-1]) + 1,
+                                   (test_pixels % image_shape[-1]) + 1]).transpose()
     correct = 0.0
     test_pixel_count = 0.0
     prediction_map = np.zeros(truth_images[0].shape, dtype=np.int)
