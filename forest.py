@@ -5,7 +5,7 @@ import random
 def add_border(image, border_value):
     for axis in range(len(image.shape)):
         shape = image.shape[:axis] + (1, ) + image.shape[(axis + 1):]
-        border = border_value * np.ones(shape)
+        border = border_value * np.ones(shape, dtype=np.int)
         image = np.concatenate((border, image, border), axis)
     return image
 
