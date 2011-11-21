@@ -14,8 +14,8 @@ def get_maps(filename):
         for channel in ("R", "G", "B")]
     truth = np.array(R + (2 * G) + (3 * B)).astype(np.int)
     depth = np.array(array.array('f', input_file.channel("Z", FLOAT)))
-    for a in truth, depth:
-        a.reshape(128, 128)
+    truth = truth.reshape(128, 128)
+    depth = depth.reshape(128, 128)
     return truth, depth
 
 if __name__ == '__main__':
