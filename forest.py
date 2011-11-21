@@ -33,14 +33,14 @@ class Split:
     def features(self, pixels, images, image_shape):
         pixels = pixels.reshape((3, -1))    # add a dimension if necessary
         depths = images[pixels[0],
-                        1 + pixels[1],
-                        1 + pixels[2]].reshape((1, -1))    # add a dimension
+                        pixels[1],
+                        pixels[2]].reshape((1, -1))    # add a dimension
         u_px = (pixels[1:] + self.u_pxmm / depths).astype(np.int)
         v_px = (pixels[1:] + self.v_pxmm / depths).astype(np.int)
-        du_mm = images[pixels[0], u_px[0].clip(0, image_shape[0] + 1),
-                                 u_px[1].clip(0, image_shape[1] + 1)]
-        dv_mm = images[pixels[0], v_px[0].clip(0, image_shape[0] + 1),
-                                 v_px[1].clip(0, image_shape[1] + 1)]
+        du_mm = images[pixels[0], u_px[0].clip(0, image_shape[0]),
+                                 u_px[1].clip(0, image_shape[1])]
+        dv_mm = images[pixels[0], v_px[0].clip(0, image_shape[0]),
+                                 v_px[1].clip(0, image_shape[1])]
         return du_mm - dv_mm
 
     def are_left(self, *args, **kwargs):
