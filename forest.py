@@ -47,11 +47,9 @@ class Split:
         return self.features(*args, **kwargs) < self.threshold_mm
 
     def __repr__(self):
-        return "Split(%r, %r, %r, %r, %r))" % (self.u_pxmm,
-                                               self.v_pxmm,
-                                               self.threshold_mm,
-                                               self.left,
-                                               self.right)
+        return "Split(%r, %r, %r))" % (self.u_pxmm,
+                                       self.v_pxmm,
+                                       self.threshold_mm)
 
 
 class Leaf:
