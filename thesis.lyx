@@ -128,6 +128,16 @@ customHeadersFooters
 \filename_suffix 0
 \color #faf0e6
 \end_branch
+\branch chapter-3
+\selected 1
+\filename_suffix 0
+\color #faf0e6
+\end_branch
+\branch NoChildDocument
+\selected 0
+\filename_suffix 0
+\color #faf0e6
+\end_branch
 \index Index
 \shortcut idx
 \color #008000
@@ -154,7 +164,7 @@ customHeadersFooters
 \begin_body
 
 \begin_layout Title
-Kezben Hand Pose Recognizer
+Kezben Hand Part Identifier
 \end_layout
 
 \begin_layout Subtitle
@@ -595,6 +605,25 @@ status open
 \begin_inset CommandInset include
 LatexCommand include
 filename "chapter-2.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Branch chapter-3
+status open
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "chapter-3.lyx"
 
 \end_inset
 
