@@ -470,6 +470,19 @@ key "Wang2011"
 Uebersax has an awesome table.
 \end_layout
 
+\begin_layout Section
+Some Assumptions
+\end_layout
+
+\begin_layout Standard
+For the purposes of this project, I assume that the hand is in frame; pixels
+ of interest are previously (or trivially) extracted from the depth image;
+ distortions, including divergence, are negligible or removed; blurring
+ is negligible due to frame rate; and the pitch, roll, and yaw of the hand
+ are limited.
+ Additionally, noise is not simulated in the synthetic data.
+\end_layout
+
 \begin_layout Standard
 \begin_inset Branch NoChildDocument
 status collapsed
