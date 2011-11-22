@@ -275,27 +275,22 @@ Overview
 \end_layout
 
 \begin_layout Standard
-bla bla bla bla bla bla bla bla bla bla bla bla bla PPS
-\begin_inset CommandInset nomenclature
-LatexCommand nomenclature
-symbol "PPS"
-description "Polyphenylene sulfide"
-
-\end_inset
-
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla
- bla bla bla bla bla bla bla, see 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Rich1921,Marq1963"
+key "Shotton2011"
 
 \end_inset
 
-.
+ indicates that synthetic depth and ground truth images are sufficient as
+ training data for a body part identification randomized decision forest.
+ Due to the substantially lower cost and higher quality of synthetic data
+ (compared to manually labeling per-pixel ground truth on real depth images),
+ all quantitative results will be based exclusively on synthetic data.
+\end_layout
+
+\begin_layout Standard
+Blender provides all of the functionality needed to produce synthetic depth
+ maps and ground truth maps.
 \end_layout
 
 \begin_layout Section
@@ -309,7 +304,94 @@ key "Smisek"
 
 \end_inset
 
- gives a focal length of 6.1 mm.
+ gives a focal length of 6.1 mm for the IR camera.
+ For ease of use, Limits Display and Passepartout are enabled.
+ Clipping is set to start at 50 cm and end at 10 m.
+\end_layout
+
+\begin_layout Section
+Model setup
+\end_layout
+
+\begin_layout Standard
+Ground truth of parts of the model is indicated by solid color vertex painting
+ of whole polygons.
+ Due to the manual nature of vertex painting, the low resolution of the
+ images, and the large number of renders required, a low polygon model is
+ preferred.
+ For this project, I selected a rigged hand and wrist model with complete
+ skeletal structure and simple, constrained palm (wrist angle), hand curl,
+ hand roll, finger spread, and finger curl controls.
+ While this set of controls is insufficient to achieve the ASL alphabet
+ (which includes crossed fingers and a variety of thumb opposition angles),
+ it should be sufficient to prove or disprove applicability of this technique
+ to hand geometries at the range and scale provided by the Kinect [baseless
+ assertion].
+\end_layout
+
+\begin_layout Standard
+A material with Vertex Color Paint enabled is required.
+ All other material properties were turned off if possible.
+ No texture is applied, since texture is not visible at the relevant resolution
+ [experimental result].
+\end_layout
+
+\begin_layout Section
+Rendering setup
+\end_layout
+
+\begin_layout Standard
+Rendering is controlled by Blender's rendering properties and node-based
+ compositing.
+ The Color and Z outputs from a Render Layers node are routed to the Image
+ and Z inputs of a Composite node.
+ 
+\end_layout
+
+\begin_layout Standard
+The IR camera has a resolution of 1280 by 960 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Smisek"
+
+\end_inset
+
+, but only achieves 15 fps at full resolution.
+ To achieve real-time results (30 fps or better), the Kinect uses VGA, QVGA,
+ or QQVGA resolutions [citation needed - original research?].
+ Thus, the render dimensions are set to 640 by 480 at 100%, with square
+ pixels (Aspect Ratio of 1.0 by 1.0).
+ Only the Combined, Z, and Color rendering passes are required, and only
+ Solid faces need to be included.
+ Anti-aliasing is disabled since the Z pass is never anti-aliased.
+ For performance, a Border Crop from 640 by 480 to 192 by 128 is used.
+ 
+\end_layout
+
+\begin_layout Standard
+The outputs are RGB OpenEXR files with RLE fast lossless compression, half
+ precision (16 bit float per channel), and Z buffer included.
+\end_layout
+
+\begin_layout Section
+Scene setup
+\end_layout
+
+\begin_layout Standard
+The Kinect clips at about 50 cm and has an effective range of about 10 m;
+ however, precision suffers considerably at longer ranges.
+ For this project, range is 0.75 m to 1.5 m.
+\end_layout
+
+\begin_layout Section
+Scripting
+\end_layout
+
+\begin_layout Standard
+An embedded Python script will pose the model by adjusting the angle of
+ bones or controls as appropriate, as well as rotating the entire model
+ across the selected range of pitch, roll, and yaw angles.
+ 
 \end_layout
 
 \begin_layout Standard
